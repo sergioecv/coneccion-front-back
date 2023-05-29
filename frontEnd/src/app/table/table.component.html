@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="d-flex row justify-content-center">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Editorial</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ libro.nombre }}</td>
+          <td>{{ libro.autor }}</td>
+          <td>{{ libro.editorial }}</td>
+          <td>
+            <button class="btn btn-danger mx-1" (click)="deleteRow(libro)">
+              Delete
+            </button>
+            <button class="btn btn-secondary mx-1">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="btn btn-success" (click)="openModal(content)">
+    Agregar libro
+  </button>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Agregar nuevo libro</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formDatos" (ngSubmit)="onClickSubmit(formDatos.value)">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="autor" class="form-label">Autor</label>
+        <input type="text" class="form-control" id="autor" formControlName="autor" />
+      </div>
+      <div class="mb-3">
+        <label for="editorial" class="form-label">Editorial</label>
+        <input type="text" class="form-control" id="editorial" formControlName="editorial" />
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">Agregar Libro</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
